@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,11 +26,20 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.CustomViewHo
     }
 
     class CustomViewHolder extends RecyclerView.ViewHolder{
-        protected TextView mid;
+        protected Button mid2;
 
         public CustomViewHolder(View view){
             super(view);
-            this.mid = (TextView) view.findViewById(R.id.textView_list_MID);
+            this.mid2 = (Button) view.findViewById(R.id.button_list_MID);
+            mid2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.InData task = new MainActivity.InData();
+                    String MID = mid2.getText().toString();
+                    //String MID = "M003";
+                    task.execute("http://" + "222.103.154.206/" + "tojson.php", MID);
+                }
+            });
         }
     }
 
@@ -44,7 +55,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.CustomViewHo
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
 
-        holder.mid.setText(mList.get(position).getMember_mid());
+        holder.mid2.setText(mList.get(position).getMember_mid());
 
     }
 
